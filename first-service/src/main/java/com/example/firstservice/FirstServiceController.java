@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/first-service")
 @Slf4j
 public class FirstServiceController {
 
