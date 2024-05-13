@@ -1,6 +1,7 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.dto.UserDto;
+import com.example.userservice.repository.UserEntity;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
@@ -14,9 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/user-service")
 public class UserController {
 
     private final Environment env;
@@ -25,18 +29,18 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user-service/health_check")
+    @GetMapping("/health_check")
     public String status() {
         return String.format("It's Working in User Service on PORT %s", env.getProperty("local.server.port"));
     }
 
-    @GetMapping("/user-service/welcome")
+    @GetMapping("/welcome")
     public String welcome() {
 //        return env.getProperty("greeting.message");
         return greeting.getMessage();
     }
 
-    @PostMapping("/user-service/users")
+    @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody RequestUser requestUser) {
 
         ModelMapper mapper = new ModelMapper();
@@ -48,5 +52,17 @@ public class UserController {
         ResponseUser responseUser = mapper.map(userDto, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<ResponseUser>> getUsers() {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByAll());
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) {
+        UserDto userByUserId = userService.getUserByUserId(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(userByUserId, ResponseUser.class));
     }
 }
