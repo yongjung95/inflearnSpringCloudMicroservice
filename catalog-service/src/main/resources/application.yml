@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: user-service
+    name: catalog-service
   h2:
     console:
       enabled: true
@@ -13,6 +13,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+    defer-datasource-initialization: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
@@ -22,14 +25,18 @@ spring:
 eureka:
   client:
     register-with-eureka: true
-    # EUREKA 서버로 부터 인스턴스들의 정보를 주기적으로 가져올 것인지를 설정하는 속성 (true 로 설정하면, 갱신된 정보를 받겠다는 설정)
+    # EUREKA ??? ?? ?????? ??? ????? ??? ???? ???? ?? (true ? ????, ??? ??? ???? ??)
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
-    lease-renewal-interval-in-seconds: 1 #하트비트 인터벌
-    lease-expiration-duration-in-seconds: 2 # 디스커버리는 서비스 등록 해제 하기 전에 마지막 하트비트에서부터 2초 기다림
+    lease-renewal-interval-in-seconds: 1 #???? ???
+    lease-expiration-duration-in-seconds: 2 # ?????? ??? ?? ?? ?? ?? ??? ???????? 2? ???
 
 greeting:
   message: Welcome to the Simple E-commerce.
+
+logging:
+  level:
+    com.example.catalogservice: DEBUG
