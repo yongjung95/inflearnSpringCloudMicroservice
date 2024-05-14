@@ -8,4 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/junge/IdeaProjects/inflearnSpringCloudMicroservice/git-local-repo
+#          uri: file:///Users/junge/IdeaProjects/inflearnSpringCloudMicroservice/git-local-repo
+          uri: https://github.com/yongjung95/inflearnSpringCloudMicroservice
+          default-label: master
+          clone-on-start: true

@@ -22,8 +22,10 @@ spring:
     config:
       name: ecommerce
 
+  # Spring Cloud Config 연동
   config:
-    import: optional:configserver:http://localhost:8888
+    import:
+      - classpath:/bootstrap.yml
 
 eureka:
   client:
