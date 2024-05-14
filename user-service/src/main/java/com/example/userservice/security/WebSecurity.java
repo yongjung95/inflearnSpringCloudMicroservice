@@ -73,13 +73,13 @@ public class WebSecurity {
         http.csrf( (csrf) -> csrf.disable());
 
         http.authorizeHttpRequests((authz) -> authz
-//                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/users", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
 //                        .requestMatchers("/**").access(this::hasIpAddress)
                                 .requestMatchers("/**").access(
-                                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.1.4')"))
+                                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.1.2')"))
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
