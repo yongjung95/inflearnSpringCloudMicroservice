@@ -47,7 +47,7 @@
 		<!-- https://velog.io/@kshired/MacOS-M1-Chip-Spring-Cloud-Gateway-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0%EB%B2%95 -->
 		<!-- https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos -->
 		<dependency>
-			<groupId>io.netty</groupId>
+			<성groupId>io.netty</성groupId>
 			<artifactId>netty-resolver-dns-native-macos</artifactId>
 			<version>4.1.68.Final</version>
 			<classifier>osx-aarch_64</classifier>
