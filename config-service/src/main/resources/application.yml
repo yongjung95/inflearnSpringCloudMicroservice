@@ -4,9 +4,13 @@ server:
 spring:
   application:
     name: config-service
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations: file://${user.home}/IdeaProjects/inflearnSpringCloudMicroservice/native-file-repo
         git:
 #          uri: file:///Users/junge/IdeaProjects/inflearnSpringCloudMicroservice/git-local-repo
           uri: https://github.com/yongjung95/inflearnSpringCloudMicroservice
