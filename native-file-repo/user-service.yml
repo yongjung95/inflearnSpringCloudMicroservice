@@ -1,6 +1,6 @@
 token:
   expiration_time: 864000000
-  secret: user_token_native_user_service
+  secret: '{cipher}AQCuGJDVFb3Vrl0IlZy/5w43NSNWY4Wuk608sRttL1yEHX3mS/bXiHf9Hv1a89XX1srXw0/vQLxUWKylyq948haDU51OHfkG3unoEQeOXJGWhO0gYVdH6htco2weCrUWDrbCW00inIMs5V2mJv+rH0rhLiOQ72dwQNJ1DizVUdY+3TNc0r+cS8b4riIldGBicY47wftmPf02iKMRB5cnClaKB4zWEwDgcbriVrfIxemM+cFGlbS+q4gHXefY95f4H+ssVLyJjt0ZDmlICLNmZD9ys2JvMMBvZSvtnb4XSp4Dtii1Mg4wfLmsZ/fhmKKbdhziuXHytdiq8aPVKir5wGaMnYUfXa+FcFLeJ6OfPLyEqLKN+7VoJWUBemq24m38nAjccYNJ9kr70leaSrxkp6hr'
 
 gateway:
   ip: 192.168.0.8
@@ -10,4 +10,4 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
     username: sa
-    password: '{cipher}f9a3a409e80b153b90d5d2cc123afb40689665237b60cdc48352eb1ee06de371'
+    password: '{cipher}AQAZ9S1TEdJKnzm56wmsrFK/4NwydU6TXg75KSwrY/PSLDUuxj62p5L5h4jBcuXJ2baivFeRSFmGn/VQe3modM4ZMPpWi82LWihjtDLqAagyef1WH2Pn+rWs6jH6ULtF0I/2A9bjq/HWBBctiw4YbjuTLAjz2hpkaWq0YXSfd56HM6WnKuCZdxpdZwwI3xHmizBy2JFMrOJNjEPpqNWz+oaA8TU3u2edjc2iIY87melsn2oE3AynohxFjGDeG506jzBYNA24F2hexhE965MUHWlshi4P0p2WOIQiU2znPdbBr/I2Y70mP0HSQP7vJUo3dZ84p/zOuQuCR+vDPZYT0EdgUuhHPzTT/4tqvyltNlQYmlJiktH9KL1jvP2m22sWgSw='

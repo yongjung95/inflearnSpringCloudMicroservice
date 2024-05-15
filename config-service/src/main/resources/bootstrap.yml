@@ -1,2 +1,6 @@
 encrypt:
-  key: abcdefghijklmnopqrstuvewxyz1234567890
+#  key: abcdefghijklmnopqrstuvewxyz1234567890
+  key-store:
+    location: file://${user.home}/IdeaProjects/inflearnSpringCloudMicroservice/keystore/apiEncryptionKey.jks
+    password: 123456zz
+    alias: apiEncryptionKey
