@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> getOrdersByUserId(String userId) {
-        List<OrderEntity> orderList = orderRepository.findAll();
+        List<OrderEntity> orderList = orderRepository.findByUserId(userId);
 
         List<OrderDto> result = new ArrayList<>();
 
