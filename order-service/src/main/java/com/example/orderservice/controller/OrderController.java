@@ -1,6 +1,7 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.messagequque.KafkaProducer;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    private final KafkaProducer kafkaProducer;
+
     @GetMapping("/health_check")
     public String status() {
         return String.format("It's Working in User Service on PORT %s", env.getProperty("local.server.port"));
@@ -31,8 +34,12 @@ public class OrderController {
     public ResponseEntity<ResponseOrder> createOrder(@PathVariable("userId") String userId,
                                                      @RequestBody OrderDto orderDto) {
         orderDto.setUserId(userId);
+        OrderDto createdOrder = orderService.createOrder(orderDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(orderService.createOrder(orderDto), ResponseOrder.class));
+        /* Send an order to the kafka */
+        kafkaProducer.send("example-catalog-topic", orderDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(createdOrder, ResponseOrder.class));
     }
 
     @GetMapping("/{userId}/orders")
