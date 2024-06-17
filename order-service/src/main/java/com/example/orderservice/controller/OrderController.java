@@ -2,6 +2,7 @@ package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.messagequque.KafkaProducer;
+import com.example.orderservice.messagequque.OrderProducer;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/order-service")
@@ -25,6 +27,8 @@ public class OrderController {
 
     private final KafkaProducer kafkaProducer;
 
+    private final OrderProducer orderProducer;
+
     @GetMapping("/health_check")
     public String status() {
         return String.format("It's Working in User Service on PORT %s", env.getProperty("local.server.port"));
@@ -34,12 +38,19 @@ public class OrderController {
     public ResponseEntity<ResponseOrder> createOrder(@PathVariable("userId") String userId,
                                                      @RequestBody OrderDto orderDto) {
         orderDto.setUserId(userId);
-        OrderDto createdOrder = orderService.createOrder(orderDto);
+
+        /* jpa */
+//        OrderDto createdOrder = orderService.createOrder(orderDto);
+
+        /* kafka */
+        orderDto.setOrderId(UUID.randomUUID().toString());
+        orderDto.setTotalPrice(orderDto.getQty() * orderDto.getUnitPrice());
 
         /* Send an order to the kafka */
         kafkaProducer.send("example-catalog-topic", orderDto);
+        orderProducer.send("orders", orderDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(createdOrder, ResponseOrder.class));
+        return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(orderDto, ResponseOrder.class));
     }
 
     @GetMapping("/{userId}/orders")
