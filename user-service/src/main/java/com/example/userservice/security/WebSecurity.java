@@ -79,7 +79,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
 //                        .requestMatchers("/**").access(this::hasIpAddress)
                                 .requestMatchers("/**").access(
-                                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.168.1.10')"))
+                                        new WebExpressionAuthorizationManager("hasIpAddress('127.0.0.1') or hasIpAddress('192.0.0.2')"))
                                 .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager)
